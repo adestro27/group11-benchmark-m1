@@ -83,9 +83,32 @@ def run_trial(rng, scenario, centres, eligible):
     row.update({f"unfinished_{c}_h": round(u, 2) for c, u in unfinished.items()})
     return row
 
+def validate_config(config):
+    """Stop with a clear message if a setting in simulation_config.json cannot be used."""
+    problems = []
+    if not isinstance(config.get("seed"), int):
+        problems.append("seed must be a whole number")
+    if not all(isinstance(n, int) and n > 0 for n in config.get("simulation_counts", [])):
+        problems.append("simulation_counts must be whole numbers above 0")
+    for scenario in config.get("scenarios", []):
+        name = scenario.get("name", "?")
+        share = scenario["decision_variables"]["reallocation_share"]
+        if not 0 <= share <= 1:
+            problems.append(f"{name}: reallocation_share must be between 0 and 1 (0.1 = 10%)")
+        for variable, spec in scenario["inputs"].items():
+            if spec["std_dev"] < 0:
+                problems.append(f"{name}: {variable} std_dev cannot be negative")
+            if spec["mean"] < 0:
+                problems.append(f"{name}: {variable} mean cannot be negative")
+        if not 0 <= scenario["inputs"]["worker_absence_rate"]["mean"] <= 1:
+            problems.append(f"{name}: worker_absence_rate mean must be between 0 and 1")
+    if problems:
+        raise SystemExit("Invalid settings in simulation_config.json:\n- " + "\n- ".join(problems)
+                         + "\nNothing was simulated; the previous results are unchanged.")
 
 def main():
     config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    validate_config(config)
     centres, eligible = read_centres(CENTRES_PATH), read_eligibility(ELIGIBILITY_PATH)
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
