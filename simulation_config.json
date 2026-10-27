@@ -1,0 +1,129 @@
+{
+  "seed": 2026,
+  "simulation_counts": [
+    1000,
+    5000
+  ],
+  "scenarios": [
+    {
+      "name": "baseline_realloc_0",
+      "decision_variables": {
+        "reallocation_share": 0.0
+      },
+      "inputs": {
+        "workload_multiplier": {
+          "distribution": "normal",
+          "mean": 1.0,
+          "std_dev": 0.12,
+          "source": "January 2024 workload = 1.00. SD = daily CV (0.648) / sqrt(30 days) = 0.118, rounded to 0.12"
+        },
+        "worker_absence_rate": {
+          "distribution": "normal",
+          "mean": 0.0289634,
+          "std_dev": 0.0165435,
+          "source": "P2 workforce data, January 2024: mean and standard deviation of the daily absence rate"
+        }
+      }
+    },
+    {
+      "name": "baseline_realloc_10",
+      "decision_variables": {
+        "reallocation_share": 0.1
+      },
+      "inputs": {
+        "workload_multiplier": {
+          "distribution": "normal",
+          "mean": 1.0,
+          "std_dev": 0.12,
+          "source": "January 2024 workload = 1.00. SD = daily CV (0.648) / sqrt(30 days) = 0.118, rounded to 0.12"
+        },
+        "worker_absence_rate": {
+          "distribution": "normal",
+          "mean": 0.0289634,
+          "std_dev": 0.0165435,
+          "source": "P2 workforce data, January 2024: mean and standard deviation of the daily absence rate"
+        }
+      }
+    },
+    {
+      "name": "baseline_realloc_20",
+      "decision_variables": {
+        "reallocation_share": 0.2
+      },
+      "inputs": {
+        "workload_multiplier": {
+          "distribution": "normal",
+          "mean": 1.0,
+          "std_dev": 0.12,
+          "source": "January 2024 workload = 1.00. SD = daily CV (0.648) / sqrt(30 days) = 0.118, rounded to 0.12"
+        },
+        "worker_absence_rate": {
+          "distribution": "normal",
+          "mean": 0.0289634,
+          "std_dev": 0.0165435,
+          "source": "P2 workforce data, January 2024: mean and standard deviation of the daily absence rate"
+        }
+      }
+    },
+    {
+      "name": "surge_realloc_0",
+      "decision_variables": {
+        "reallocation_share": 0.0
+      },
+      "inputs": {
+        "workload_multiplier": {
+          "distribution": "normal",
+          "mean": 1.15,
+          "std_dev": 0.12,
+          "source": "Assumption (P1: sudden influx of orders): mean +15%, same SD as baseline"
+        },
+        "worker_absence_rate": {
+          "distribution": "normal",
+          "mean": 0.0289634,
+          "std_dev": 0.0165435,
+          "source": "P2 workforce data, January 2024: mean and standard deviation of the daily absence rate"
+        }
+      }
+    },
+    {
+      "name": "surge_realloc_10",
+      "decision_variables": {
+        "reallocation_share": 0.1
+      },
+      "inputs": {
+        "workload_multiplier": {
+          "distribution": "normal",
+          "mean": 1.15,
+          "std_dev": 0.12,
+          "source": "Assumption (P1: sudden influx of orders): mean +15%, same SD as baseline"
+        },
+        "worker_absence_rate": {
+          "distribution": "normal",
+          "mean": 0.0289634,
+          "std_dev": 0.0165435,
+          "source": "P2 workforce data, January 2024: mean and standard deviation of the daily absence rate"
+        }
+      }
+    },
+    {
+      "name": "surge_realloc_20",
+      "decision_variables": {
+        "reallocation_share": 0.2
+      },
+      "inputs": {
+        "workload_multiplier": {
+          "distribution": "normal",
+          "mean": 1.15,
+          "std_dev": 0.12,
+          "source": "Assumption (P1: sudden influx of orders): mean +15%, same SD as baseline"
+        },
+        "worker_absence_rate": {
+          "distribution": "normal",
+          "mean": 0.0289634,
+          "std_dev": 0.0165435,
+          "source": "P2 workforce data, January 2024: mean and standard deviation of the daily absence rate"
+        }
+      }
+    }
+  ]
+}
